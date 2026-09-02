@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CV — Amirarsham Montazeri</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="shell" id="shell">
+  <main>
+    <div class="content">
+
+      <section class="section">
+        <h1>CV</h1>
+        <p>An overview of education, experience, and skills. A downloadable PDF will appear here once uploaded.</p>
+        <div id="cvDownload"></div>
+      </section>
+
+      <section class="section">
+        <h2>Education</h2>
+        <div class="timeline" id="cvEdu"></div>
+      </section>
+
+      <section class="section">
+        <h2>Experience</h2>
+        <div class="timeline" id="cvExp"></div>
+      </section>
+
+      <section class="section">
+        <h2>Skills</h2>
+        <div id="cvSkills"></div>
+      </section>
+
+      <section class="section">
+        <h2>Publications</h2>
+        <div id="cvPubs"></div>
+      </section>
+
+    </div>
+  </main>
+</div>
+
+<script src="assets/content.js"></script>
+<script src="assets/main.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const dl = document.getElementById("cvDownload");
+  dl.innerHTML = SITE.cvFile
+    ? `<a class="button" href="${SITE.cvFile}" target="_blank" rel="noopener">Download PDF</a>`
+    : emptyState("No CV file uploaded yet. Add one to assets/ and set cvFile in content.js.");
+
+  document.getElementById("cvEdu").innerHTML = SITE.education.map(e => `
+    <div class="entry">
+      <h3>${e.school}</h3>
+      <div class="meta">${e.program}${e.years ? " · " + e.years : ""}</div>
+      ${e.note ? `<p>${e.note}</p>` : ""}
+    </div>
+  `).join("") || emptyState("Education details coming soon.");
+
+  document.getElementById("cvExp").innerHTML = emptyState(
+    "No formal research, lab, or employment experience listed yet — this section will be filled in as it happens. " +
+    "Tutoring experience is listed separately on the Tutoring page."
+  );
+
+  const sk = SITE.skills;
+  document.getElementById("cvSkills").innerHTML = `
+    <div class="section" style="margin-bottom:1.5rem;">
+      <h3>Programming</h3>
+      <div class="tag-row">${sk.programming.map(s => `<span class="tag">${s}</span>`).join("")}</div>
+    </div>
+    <div class="section" style="margin-bottom:1.5rem;">
+      <h3>Languages</h3>
+      <div class="tag-row">${sk.languages.map(s => `<span class="tag">${s}</span>`).join("")}</div>
+    </div>
+    <div class="section" style="margin-bottom:0;">
+      <h3>Other</h3>
+      <div class="tag-row">${sk.other.map(s => `<span class="tag">${s}</span>`).join("")}</div>
+    </div>
+  `;
+
+  document.getElementById("cvPubs").innerHTML = SITE.publications.length
+    ? SITE.publications.map(p => `<div class="entry"><h3>${p.title}</h3><p>${p.description || ""}</p></div>`).join("")
+    : emptyState("No publications yet.");
+});
+</script>
+</body>
+</html>

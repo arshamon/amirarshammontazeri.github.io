@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — Amirarsham Montazeri</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="shell" id="shell">
+  <main>
+    <div class="content">
+
+      <section class="section">
+        <h1>Contact</h1>
+        <p>The best ways to reach me.</p>
+        <div id="contactLinks"></div>
+      </section>
+
+    </div>
+  </main>
+</div>
+
+<script src="assets/content.js"></script>
+<script src="assets/main.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("contactLinks").innerHTML = renderLinks();
+});
+</script>
+</body>
+</html>

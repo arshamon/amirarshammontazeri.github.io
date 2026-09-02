@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Amirarsham Montazeri</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="shell" id="shell">
+  <main>
+    <div class="content">
+
+      <section class="hero">
+        <svg class="hero-motif" viewBox="0 0 220 220" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M110 20 C110 60, 90 60, 90 90 C90 115, 70 115, 65 140" stroke="#2F5D62" stroke-width="1.4"/>
+          <path d="M110 20 C110 60, 130 60, 132 95 C133 118, 150 118, 160 145" stroke="#2F5D62" stroke-width="1.4"/>
+          <path d="M110 20 C112 45, 105 55, 100 70" stroke="#2F5D62" stroke-width="1.4"/>
+          <path d="M65 140 C55 150, 50 165, 40 172" stroke="#2F5D62" stroke-width="1"/>
+          <path d="M65 140 C68 155, 62 168, 58 180" stroke="#2F5D62" stroke-width="1"/>
+          <path d="M160 145 C168 158, 165 170, 172 182" stroke="#2F5D62" stroke-width="1"/>
+          <path d="M160 145 C150 158, 152 170, 145 180" stroke="#2F5D62" stroke-width="1"/>
+          <circle cx="110" cy="20" r="3" fill="#2F5D62"/>
+          <circle cx="65" cy="140" r="2.2" fill="#2F5D62"/>
+          <circle cx="160" cy="145" r="2.2" fill="#2F5D62"/>
+        </svg>
+        <h1 id="heroName">Name</h1>
+        <p class="tagline" id="heroTagline"></p>
+        <div class="cta-row">
+          <a class="button" href="research.html">View research</a>
+          <a class="button" href="cv.html">View CV</a>
+        </div>
+      </section>
+
+      <hr class="divider">
+
+      <section class="section">
+        <h2>Education</h2>
+        <div id="eduList"></div>
+      </section>
+
+      <section class="section">
+        <h2>Areas of interest</h2>
+        <div class="tag-row" id="interestTags"></div>
+      </section>
+
+      <section class="section">
+        <h2>Also tutoring</h2>
+        <p id="tutorSummary"></p>
+        <a href="tutoring.html">More on the Tutoring page &rarr;</a>
+      </section>
+
+    </div>
+  </main>
+</div>
+
+<script src="assets/content.js"></script>
+<script src="assets/main.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("heroName").textContent = SITE.name;
+  document.getElementById("heroTagline").textContent = SITE.tagline;
+
+  const edu = document.getElementById("eduList");
+  edu.innerHTML = SITE.education.map(e => `
+    <div class="entry">
+      <h3>${e.school}</h3>
+      <div class="meta">${e.program}${e.years ? " · " + e.years : ""}</div>
+      ${e.note ? `<p>${e.note}</p>` : ""}
+    </div>
+  `).join("") || emptyState("Education details coming soon.");
+
+  const tags = document.getElementById("interestTags");
+  tags.innerHTML = SITE.interests.map(i => `<span class="tag">${i}</span>`).join("") || emptyState("Interests coming soon.");
+
+  document.getElementById("tutorSummary").textContent = SITE.tutoringIntro;
+});
+</script>
+</body>
+</html>

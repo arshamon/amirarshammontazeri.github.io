@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Research — Amirarsham Montazeri</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="shell" id="shell">
+  <main>
+    <div class="content">
+
+      <section class="section">
+        <h1>Research</h1>
+        <p>A record of research and lab experience as it develops.</p>
+        <div id="researchList"></div>
+      </section>
+
+      <section class="section">
+        <h2>Interests guiding future work</h2>
+        <div class="tag-row" id="interestTags"></div>
+      </section>
+
+    </div>
+  </main>
+</div>
+
+<script src="assets/content.js"></script>
+<script src="assets/main.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const list = document.getElementById("researchList");
+  if (SITE.research.length) {
+    list.innerHTML = SITE.research.map(r => `
+      <div class="entry">
+        <h3>${r.title}</h3>
+        <div class="meta">${[r.role, r.period].filter(Boolean).join(" · ")}</div>
+        <p>${r.description || ""}</p>
+        ${r.link ? `<a href="${r.link}" target="_blank" rel="noopener">Learn more</a>` : ""}
+      </div>
+    `).join("");
+  } else {
+    list.innerHTML = emptyState("No research experience listed yet — this section will be updated as it happens.");
+  }
+
+  document.getElementById("interestTags").innerHTML =
+    SITE.interests.map(i => `<span class="tag">${i}</span>`).join("");
+});
+</script>
+</body>
+</html>
